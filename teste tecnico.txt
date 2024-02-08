@@ -1,0 +1,72 @@
+#Dicionario para guardar as bebidas e sabores
+bebidas = {
+    "refrigerante": ["coca", "guarana"],
+    "suco": ["uva", "laranja"]
+}
+
+#Escolha do tipo de bebida, caso incorreto, perguntar novamente
+while True:
+    tipo_bebida = input("Qual tipo de bebida você quer? Refrigerante ou suco? ").lower()
+    if tipo_bebida in bebidas:
+        break
+    else:
+        print("Opção inválida para bebida, por favor escolha entre refrigerante ou suco.")
+
+#Escolha do sabor da bebida, caso incorreto, perguntar novamente
+while True:
+    tipo_sabor = input(f"Você vai querer {tipo_bebida} de {' ou '.join(bebidas[tipo_bebida])}? ").lower()
+    if tipo_sabor in bebidas[tipo_bebida]:
+        break
+    else:
+        print("Opção inválida para sabor.")
+        print("Opções válidas de sabor:", ', '.join(bebidas[tipo_bebida]))
+
+#if e elif para definir tipo de copo e tamanhos de copos disponiveis baseados no tipo de bebida 
+if tipo_bebida == "refrigerante":
+    copo = "papel"
+    tamanhos_disponiveis = ["300ml", "500ml", "700ml"]
+elif tipo_bebida == "suco":
+    copo = "plástico"
+    tamanhos_disponiveis = ["300ml", "500ml"]
+
+#Escolha do gelo, caso incorreto, perguntar novamente
+while True:
+    gelo = input("Com gelo ou sem? ").lower()
+    if gelo == "com" or gelo == "sem":
+        break
+    else:
+        print("Opção inválida para gelo.")
+
+#Quantidade de gelo baseado no tipo de bebida
+if gelo == "com":
+    qtd_gelo = 6 if tipo_bebida == "refrigerante" else 12
+elif gelo == "sem":
+    qtd_gelo = "nenhum"
+
+#Escolha do tamanho de copo, caso incorreto, perguntar novamente
+while True:
+    try:
+        tamanho = int(input(f"Qual tamanho do copo você vai querer? Temos {', '.join(tamanhos_disponiveis)} disponíveis: "))
+        if str(tamanho) + "ml" in tamanhos_disponiveis:
+            break
+        else:
+            print("Por favor, escolha um tamanho disponível.")
+    except ValueError:
+        print("Por favor, insira apenas números.")
+
+#Escolha do tipo de pedido (take out ou eat in), caso incorreto, perguntar novamente
+while True:
+    tipo_pedido = input("Qual é o tipo de pedido? Take Out (Delivery) ou Eat In (comer no próprio restaurante)? ").lower()
+    if tipo_pedido == "take out" or tipo_pedido == "eat in":
+        break
+    else:
+        print("Opção inválida para tipo de pedido, Tente Take Out ou Eat In.")
+
+#Definir a tampa baseado no tipo de pedido
+if tipo_pedido == "take out":
+    tampa = "sem furo"
+else:
+    tampa = "com furo para o canudo"
+
+#Mostrar todos os detalhes do pedido
+print(f"Você escolheu {tipo_bebida} sabor {tipo_sabor} com {qtd_gelo} cubos de gelo.\nE será servido em um copo de {copo} de {tamanho}ml, com uma tampa {tampa}.")
