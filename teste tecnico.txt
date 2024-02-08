@@ -4,6 +4,12 @@ bebidas = {
     "suco": ["uva", "laranja"]
 }
 
+# Dicionário para os tamanhos de copos
+tamanhos_disponiveis = {
+    "refrigerante": ["300ml", "500ml", "700ml"],
+    "suco": ["300ml", "500ml"]
+}
+
 #Escolha do tipo de bebida, caso incorreto, perguntar novamente
 while True:
     tipo_bebida = input("Qual tipo de bebida você quer? Refrigerante ou suco? ").lower()
@@ -24,10 +30,8 @@ while True:
 #if e elif para definir tipo de copo e tamanhos de copos disponiveis baseados no tipo de bebida 
 if tipo_bebida == "refrigerante":
     copo = "papel"
-    tamanhos_disponiveis = ["300ml", "500ml", "700ml"]
 elif tipo_bebida == "suco":
     copo = "plástico"
-    tamanhos_disponiveis = ["300ml", "500ml"]
 
 #Escolha do gelo, caso incorreto, perguntar novamente
 while True:
@@ -43,11 +47,11 @@ if gelo == "com":
 elif gelo == "sem":
     qtd_gelo = "nenhum"
 
-#Escolha do tamanho de copo, caso incorreto, perguntar novamente
+# Escolha do tamanho de copo, caso incorreto, perguntar novamente
 while True:
     try:
-        tamanho = int(input(f"Qual tamanho do copo você vai querer? Temos {', '.join(tamanhos_disponiveis)} disponíveis: "))
-        if str(tamanho) + "ml" in tamanhos_disponiveis:
+        tamanho = int(input(f"Qual tamanho do copo você vai querer? Temos {', '.join(tamanhos_disponiveis[tipo_bebida])} disponíveis: "))
+        if str(tamanho) + "ml" in tamanhos_disponiveis[tipo_bebida]:
             break
         else:
             print("Por favor, escolha um tamanho disponível.")
